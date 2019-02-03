@@ -15,9 +15,6 @@ namespace DAL.Model
         public string LastName { get; set; }
         
         [Required]
-        public bool GameEnabled { get; set; }
-
-        [Required]
         public bool IsAdmin { get; set; }
     }
 }

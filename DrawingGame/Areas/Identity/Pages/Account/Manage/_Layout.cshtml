@@ -1,21 +1,12 @@
-﻿@{ 
-    Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Manage your account</h2>
+<h1>Manage your account</h1>
 
-<div>
-    <h4>Change your account settings</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-3">
-            <partial name="_ManageNav" />
-        </div>
-        <div class="col-md-9">
-            @RenderBody()
-        </div>
-    </div>
-</div>
+<h2>Change your account settings</h2>
+
+@RenderBody()
 
 @section Scripts {
     @RenderSection("Scripts", required: false)

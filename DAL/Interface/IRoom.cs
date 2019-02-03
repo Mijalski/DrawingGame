@@ -7,7 +7,8 @@ namespace DAL.Interface
 {
     public interface IRoom
     {
-        void AddNewRoom(Room room);
-        Room GetRoom(string keyCode);
+        Room AddNewRoom(UserAccount userAccount);
+        Room GetRoomByKeyCode(string keyCode);
+        Room GetRoomByUserId(string id);
     }
 }

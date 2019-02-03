@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using BusinessLogic.Manager;
 using DAL;
+using DAL.Model;
 
 namespace DrawingGame
 {
@@ -39,7 +40,8 @@ namespace DrawingGame
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
+
+            services.AddDefaultIdentity<UserAccount>()
                 .AddEntityFrameworkStores<DatabaseContext>();
             
             services.Configure<IdentityOptions>(options =>

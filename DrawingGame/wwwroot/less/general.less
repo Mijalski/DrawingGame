@@ -1,4 +1,27 @@
-﻿html, body {
+﻿
+/****************** VARIABLES ****************/
+
+/************** COLORS *************/
+@color-grey: #ccc;
+@color-link: #007bff;
+
+/************** SCREEN SIZES *************/
+@col-max-size-xs: 576px;
+@col-max-size-sm: 768px;
+@col-max-size-md: 992px;
+@col-max-size-lg: 1200px;
+
+/************** MISC *************/
+@standard-border: 1px solid @color-grey;
+
+html, body {
     height: 100%;
     font-family: 'Poppins', sans-serif;
+}
+h1 {
+    border-bottom: @standard-border;
+    margin-bottom: 25px;
+}
+h2 {
+    margin-bottom: 15px;
 }

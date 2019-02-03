@@ -83,7 +83,7 @@ using DrawingGame.Areas.Identity.Pages.Account.Manage;
             WriteLiteral("<ul class=\"nav nav-pills nav-stacked\">\r\n    ");
             EndContext();
             BeginContext(199, 33, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a4fab0f55fec467d86cefe9f24facd34", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "473558bba4f140a4a495edf4158eac37", async() => {
                 BeginContext(221, 7, true);
                 WriteLiteral("Profile");
                 EndContext();
@@ -105,7 +105,7 @@ using DrawingGame.Areas.Identity.Pages.Account.Manage;
             WriteLiteral("\r\n    ");
             EndContext();
             BeginContext(238, 64, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6d485a1d4ff34745809155f065ce8d6d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "dd7cc5a64da04a9595b1edb6cccca633", async() => {
                 BeginContext(290, 8, true);
                 WriteLiteral("Password");
                 EndContext();
@@ -137,7 +137,7 @@ using DrawingGame.Areas.Identity.Pages.Account.Manage;
             WriteLiteral("        ");
             EndContext();
             BeginContext(348, 70, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f44af3745c6444b4945231278cf21cd4", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5a868784c9c54c7f8ef3a47ddfb71bea", async() => {
                 BeginContext(399, 15, true);
                 WriteLiteral("External logins");
                 EndContext();
@@ -168,7 +168,7 @@ using DrawingGame.Areas.Identity.Pages.Account.Manage;
             WriteLiteral("    ");
             EndContext();
             BeginContext(431, 69, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "450f5fcd1f904485a7af3195b25e1ab5", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1bfdf88e0e6c4719ac0864837cc284ba", async() => {
                 BeginContext(471, 25, true);
                 WriteLiteral("Two-factor authentication");
                 EndContext();
@@ -190,7 +190,7 @@ using DrawingGame.Areas.Identity.Pages.Account.Manage;
             WriteLiteral("\r\n    ");
             EndContext();
             BeginContext(506, 46, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "96952e0f35384d6593a0754e8b449b04", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6aafd057311c47e19528acf34b29101e", async() => {
                 BeginContext(535, 13, true);
                 WriteLiteral("Personal data");
                 EndContext();

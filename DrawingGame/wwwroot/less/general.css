@@ -1,5 +1,16 @@
-﻿html,
+﻿/****************** VARIABLES ****************/
+/************** COLORS *************/
+/************** SCREEN SIZES *************/
+/************** MISC *************/
+html,
 body {
   height: 100%;
   font-family: 'Poppins', sans-serif;
+}
+h1 {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 25px;
+}
+h2 {
+  margin-bottom: 15px;
 }
