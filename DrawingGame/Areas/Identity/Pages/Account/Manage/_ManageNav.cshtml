@@ -1,0 +1,14 @@
+﻿@inject SignInManager<UserAccount> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+<ul class="nav nav-pills nav-stacked">
+    <a asp-page="./Index">Profile</a>
+    <a id="change-password" asp-page="./ChangePassword">Password</a>
+    @if (hasExternalLogins)
+    {
+        <a id="external-login" asp-page="./ExternalLogins">External logins</a>
+    }
+    <a asp-page="./TwoFactorAuthentication">Two-factor authentication</a>
+    <a asp-page="./PersonalData">Personal data</a>
+</ul>>

@@ -1,0 +1,9 @@
+C:\Users\mijal\source\repos\DrawingGame\DAL\bin\Debug\netcoreapp2.1\DAL.deps.json
+C:\Users\mijal\source\repos\DrawingGame\DAL\bin\Debug\netcoreapp2.1\DAL.dll
+C:\Users\mijal\source\repos\DrawingGame\DAL\obj\Debug\netcoreapp2.1\DAL.csproj.CoreCompileInputs.cache
+C:\Users\mijal\source\repos\DrawingGame\DAL\obj\Debug\netcoreapp2.1\DAL.AssemblyInfoInputs.cache
+C:\Users\mijal\source\repos\DrawingGame\DAL\obj\Debug\netcoreapp2.1\DAL.AssemblyInfo.cs
+C:\Users\mijal\source\repos\DrawingGame\DAL\obj\Debug\netcoreapp2.1\DAL.csprojAssemblyReference.cache
+C:\Users\mijal\source\repos\DrawingGame\DAL\bin\Debug\netcoreapp2.1\DAL.pdb
+C:\Users\mijal\source\repos\DrawingGame\DAL\obj\Debug\netcoreapp2.1\DAL.dll
+C:\Users\mijal\source\repos\DrawingGame\DAL\obj\Debug\netcoreapp2.1\DAL.pdb

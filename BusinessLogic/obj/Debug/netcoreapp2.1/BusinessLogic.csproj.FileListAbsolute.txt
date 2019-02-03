@@ -1,0 +1,12 @@
+C:\Users\mijal\source\repos\DrawingGame\BusinessLogic\bin\Debug\netcoreapp2.1\BusinessLogic.deps.json
+C:\Users\mijal\source\repos\DrawingGame\BusinessLogic\bin\Debug\netcoreapp2.1\BusinessLogic.dll
+C:\Users\mijal\source\repos\DrawingGame\BusinessLogic\bin\Debug\netcoreapp2.1\BusinessLogic.pdb
+C:\Users\mijal\source\repos\DrawingGame\BusinessLogic\bin\Debug\netcoreapp2.1\DAL.dll
+C:\Users\mijal\source\repos\DrawingGame\BusinessLogic\bin\Debug\netcoreapp2.1\DAL.pdb
+C:\Users\mijal\source\repos\DrawingGame\BusinessLogic\obj\Debug\netcoreapp2.1\BusinessLogic.csprojAssemblyReference.cache
+C:\Users\mijal\source\repos\DrawingGame\BusinessLogic\obj\Debug\netcoreapp2.1\BusinessLogic.csproj.CoreCompileInputs.cache
+C:\Users\mijal\source\repos\DrawingGame\BusinessLogic\obj\Debug\netcoreapp2.1\BusinessLogic.AssemblyInfoInputs.cache
+C:\Users\mijal\source\repos\DrawingGame\BusinessLogic\obj\Debug\netcoreapp2.1\BusinessLogic.AssemblyInfo.cs
+C:\Users\mijal\source\repos\DrawingGame\BusinessLogic\obj\Debug\netcoreapp2.1\BusinessLogic.csproj.CopyComplete
+C:\Users\mijal\source\repos\DrawingGame\BusinessLogic\obj\Debug\netcoreapp2.1\BusinessLogic.dll
+C:\Users\mijal\source\repos\DrawingGame\BusinessLogic\obj\Debug\netcoreapp2.1\BusinessLogic.pdb
