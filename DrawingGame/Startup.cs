@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using BusinessLogic.Manager;
 using DAL;
 using DAL.Model;
+using DrawingGame.Hubs;
 
 namespace DrawingGame
 {
@@ -58,8 +59,11 @@ namespace DrawingGame
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services.AddSignalR();
+
             services.AddScoped<IUserAccount, UserAccountManager>();
             services.AddScoped<IRoom, RoomManager>();
+            services.AddScoped<IAnswer, AnswerManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,6 +83,11 @@ namespace DrawingGame
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<RoomHub>("/roomHub");
+            });
 
             app.UseAuthentication();
 

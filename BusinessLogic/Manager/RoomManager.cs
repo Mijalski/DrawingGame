@@ -11,7 +11,6 @@ namespace BusinessLogic.Manager
 {
     public class RoomManager : IRoom
     {
-        const string pool = "abcdefghijklmnopqrstuvwxyz0123456789";
         private DatabaseContext context;
 
         public RoomManager(DatabaseContext _context)
@@ -24,7 +23,7 @@ namespace BusinessLogic.Manager
             var room = new Room()
             {
                 GameEnded = false,
-                KeyCode = RandomString(6),
+                KeyCode = RandomizeHelper.GetRandomString(6),
                 Owner = userAccount,
                 PlayerCount = 0,
                 StartDateTime = DateTime.Now
@@ -40,21 +39,11 @@ namespace BusinessLogic.Manager
         {
             return context.Rooms.Single(_ => _.KeyCode == keyCode);
         }
-
-        public Room GetRoomByUserId(string id)
+        
+        public Room GetRoomForOwner(string keyCode, UserAccount userAccount)
         {
-            //to do mark all others as to delte
-
-            return context.Rooms.Include(_ => _.Owner).FirstOrDefault(_ => _.Owner.Id == id);
+            return context.Rooms.Include(_ => _.Owner).Single(_ => _.KeyCode == keyCode && _.Owner == userAccount);
         }
-
-        private static string RandomString(int length)
-        {
-            Random random = new Random();
-            const string pool = "abcdefghijklmnopqrstuvwxyz0123456789";
-            var chars = Enumerable.Range(0, length)
-                .Select(x => pool[random.Next(0, pool.Length)]);
-            return new string(chars.ToArray());
-        }
+        
     }
 }

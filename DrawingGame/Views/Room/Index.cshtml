@@ -1,5 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Rysuneczki - najlepsza gra imprezowa!";
+    Layout = "_RoomLayout";
 }
 
 @using DAL.Model
@@ -7,5 +8,12 @@
 
 @model DrawingGame.Models.RoomModel
 
+<div class="canvas-holder">
+    <canvas id="drawing-canvas"></canvas>
+</div>
 
-WITAJ W POKOJU @Model.RoomCode
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/lib/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/room-client-signalr.js"></script>
+<script src="~/js/game-logic.js"></script>
+<script src="~/js/drawing.js"></script>

@@ -51,3 +51,4 @@ C:\Users\mijal\source\repos\DrawingGame\DrawingGame\obj\Debug\netcoreapp2.1\Razo
 C:\Users\mijal\source\repos\DrawingGame\DrawingGame\obj\Debug\netcoreapp2.1\Razor\Areas\Identity\Pages\Account\Register.g.cshtml.cs
 C:\Users\mijal\source\repos\DrawingGame\DrawingGame\obj\Debug\netcoreapp2.1\Razor\Views\Room\Index.g.cshtml.cs
 C:\Users\mijal\source\repos\DrawingGame\DrawingGame\obj\Debug\netcoreapp2.1\Razor\Views\Room\Master.g.cshtml.cs
+C:\Users\mijal\source\repos\DrawingGame\DrawingGame\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_RoomLayout.g.cshtml.cs

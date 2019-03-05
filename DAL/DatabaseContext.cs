@@ -19,6 +19,7 @@ namespace DAL
 
         public DbSet<UserAccount> UserAccounts { get; set; }
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<Answer> Answers { get; set; }
         
     }
 }

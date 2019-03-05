@@ -9,6 +9,6 @@ namespace DAL.Interface
     {
         Room AddNewRoom(UserAccount userAccount);
         Room GetRoomByKeyCode(string keyCode);
-        Room GetRoomByUserId(string id);
+        Room GetRoomForOwner(string keyCode, UserAccount userAccount);
     }
 }

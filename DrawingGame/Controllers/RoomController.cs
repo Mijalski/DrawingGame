@@ -6,6 +6,7 @@ using DAL.Interface;
 using DAL.Model;
 using DrawingGame.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -42,13 +43,15 @@ namespace DrawingGame.Controllers
                 return RedirectToAction("Error", "Home");
             }
         }
-
+        
         [Authorize]
-        public async Task<IActionResult>  Master()
+        public async Task<IActionResult> Master()
         {
             var user = await GetCurrentUserAsync();
 
-            var room = _rooms.AddNewRoom(user);
+            string keyCode = null; //TODO implement getting key code from url
+
+            var room = string.IsNullOrEmpty(keyCode) ? _rooms.AddNewRoom(user) : _rooms.GetRoomForOwner(keyCode, user);
             
             var model = new RoomModel()
             {
@@ -57,5 +60,6 @@ namespace DrawingGame.Controllers
 
             return View(model);
         }
+        
     }
 }
