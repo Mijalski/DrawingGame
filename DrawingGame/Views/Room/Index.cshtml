@@ -2,18 +2,24 @@
     ViewData["Title"] = "Rysuneczki - najlepsza gra imprezowa!";
     Layout = "_RoomLayout";
 }
-
 @using DAL.Model
 @using Microsoft.AspNetCore.Identity
 
 @model DrawingGame.Models.RoomModel
 
-<div class="canvas-holder">
+<div class="text-center non-game">
+    Oczekiwanie na graczy
+</div>
+<div id="answer-game" class="game d-none text-center">
+    Hasło: 
+</div>
+<div class="canvas-holder game d-none">
     <canvas id="drawing-canvas"></canvas>
 </div>
+<button id="finish-drawing" type="button" class="btn btn-success game btn-block d-none mt-1">Zatwierdź</button>
 
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="~/lib/signalr/dist/browser/signalr.js"></script>
-<script src="~/js/room-client-signalr.js"></script>
-<script src="~/js/game-logic.js"></script>
+<script src="~/js/client-room-signalr.js"></script>
+<script src="~/js/client-game-logic.js"></script>
 <script src="~/js/drawing.js"></script>

@@ -9,5 +9,7 @@ namespace DrawingGame.Models
     public class IndexModel
     {
         public string KeyCode { get; set; }
+
+        public string UserName { get; set; }
     }
 }

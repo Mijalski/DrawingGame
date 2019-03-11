@@ -11,6 +11,8 @@
     <div class="col-md-4 offset-md-4">
         <form asp-controller="Home" asp-action="JoinRoom">
             <div class="form-group">
+                <label for="room-code-join">Nick:</label>
+                <input type="text" asp-for="UserName" class="form-control mb-3" id="name" placeholder="Andrzej">
                 <label for="room-code-join">Nazwa pokoju:</label>
                 <input type="text" asp-for="KeyCode" class="form-control mb-3" id="room-code-join" placeholder="XYZ123">
                 <button id="join-room-button" class="float-right btn btn-success">

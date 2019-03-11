@@ -6,17 +6,29 @@
 @using Microsoft.AspNetCore.Identity
 @model DrawingGame.Models.RoomModel
 
-<div class="centered-text big-text">
-    STWORZYLES POKOJ 
+<div id="pre-game" class="centered-text big-text">
+    STWORZYLES POKOJ
     <span id="room-id">@Model.RoomCode.ToUpper()</span>
     <div>
         <span id="player-count">0</span>/10
     </div>
+    <div id="user-names">
+
+    </div>
     <button id="start-game" type="button" class="btn btn-success" disabled>Gramy!</button>
+</div>
+<div id="in-drawing" class="centered-text big-text d-none">
+    Pora rysować
+    <span id="player-drawing-count">0</span>/<span id="player-drawing-max-count"></span>
+    <span id="drawing-timer"></span>
+</div>
+<div class="canvas-holder game d-none">
+    <canvas id="drawing-canvas"></canvas>
 </div>
 
 
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="~/lib/signalr/dist/browser/signalr.js"></script>
-<script src="~/js/game-logic.js"></script>
-<script src="~/js/room-master-signalr.js"></script>
+<script src="~/js/master-game-logic.js"></script>
+<script src="~/js/painting.js"></script>
+<script src="~/js/master-room-signalr.js"></script>

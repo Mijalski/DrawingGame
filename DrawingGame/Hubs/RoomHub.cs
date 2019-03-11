@@ -18,18 +18,23 @@ namespace DrawingGame.Hubs
             _answers = answers;
         }
 
-        public async Task AddToGroup(string groupName)
+        public async Task AddToGroup(string groupName, string userName)
         {
             await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
 
-            await Clients.Group(groupName).SendAsync("RecieveNewPlayerJoin", $"{Context.ConnectionId} has joined the group {groupName}.");
+            await Clients.Group(groupName).SendAsync("RecieveNewPlayerMaster", Context.ConnectionId, userName);
+        }
+        
+        public async Task ConfirmPlayerLogin(string connectionId, int gameState)
+        {
+            await Clients.Client(connectionId).SendAsync("ConfirmPlayerJoin", gameState,Context.ConnectionId);
         }
 
         public async Task CreateNewGroup(string groupName)
         {
             await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
 
-            await Clients.Group(groupName).SendAsync("RoomStarted", $"Group created {groupName}.");
+            await Clients.Group(groupName).SendAsync("RoomStarted", groupName);
         }
 
         public async Task StartRound(string groupName)
@@ -37,9 +42,25 @@ namespace DrawingGame.Hubs
             await Clients.Group(groupName).SendAsync("StartRound");
         }
 
-        public async Task RequestAnsewer(string clientId)
+        public async Task RequestAnswer()
         {
-            await Clients.User(clientId).SendAsync("RecieveAnswer", _answers.GetRandomAnswer(false).Text);
+            var a = _answers.GetRandomAnswer(false).Text;
+            await Clients.Client(Context.ConnectionId).SendAsync("RecieveAnswer", a);
+        }
+        
+        public async Task ReadyDrawing(string groupName, string userName)
+        {
+            await Clients.Group(groupName).SendAsync("ReadyDrawing", Context.ConnectionId, userName);
+        }
+
+        public async Task GetDrawing(string connectionId)
+        {
+            await Clients.Client(connectionId).SendAsync("GetDrawing");
+        }
+        
+        public async Task SendDrawing(string connectionId, string answer, int[] clickX, int[] clickY, bool[] clickDrag)
+        {
+            await Clients.Client(connectionId).SendAsync("RecieveDrawing", answer, clickX, clickY, clickDrag);
         }
     }
 }

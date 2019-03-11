@@ -8,5 +8,7 @@ namespace DrawingGame.Models
     public class RoomModel
     {
         public string RoomCode { get; set; }
+
+        public string UserName { get; set; }
     }
 }

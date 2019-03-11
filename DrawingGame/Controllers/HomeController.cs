@@ -51,9 +51,9 @@ namespace DrawingGame.Controllers
             return RedirectToAction("Master", "Room");
         }
         
-        public IActionResult JoinRoom(string keyCode)
+        public IActionResult JoinRoom(string keyCode,string userName)
         {
-            return RedirectToAction("Index", "Room", new {keyCode = keyCode});
+            return RedirectToAction("Index", "Room", new {keyCode, userName});
         }
     }
 }
