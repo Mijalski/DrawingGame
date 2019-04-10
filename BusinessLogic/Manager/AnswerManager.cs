@@ -21,7 +21,7 @@ namespace BusinessLogic.Manager
         public Answer GetRandomAnswer(bool appropriate)
         {
             var answers = context.Answers.ToList();
-            return answers.Find(_ => _.Id == RandomizeHelper.GetRandomValue(answers.Count));
+            return answers.ElementAt(RandomizeHelper.GetRandomValue(answers.Count));
         }
     }
 }

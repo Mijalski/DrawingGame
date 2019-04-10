@@ -58,8 +58,6 @@ namespace DAL.Migrations
                     b.Property<string>("OwnerId")
                         .IsRequired();
 
-                    b.Property<int>("PlayerCount");
-
                     b.Property<DateTime>("StartDateTime");
 
                     b.HasKey("Id");
@@ -67,6 +65,29 @@ namespace DAL.Migrations
                     b.HasIndex("OwnerId");
 
                     b.ToTable("Rooms");
+                });
+
+            modelBuilder.Entity("DAL.Model.RoomConnection", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ConnectionId")
+                        .IsRequired();
+
+                    b.Property<bool>("IsMaster");
+
+                    b.Property<int>("RoomId");
+
+                    b.Property<string>("UserName")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("RoomConnections");
                 });
 
             modelBuilder.Entity("DAL.Model.UserAccount", b =>
@@ -247,6 +268,14 @@ namespace DAL.Migrations
                     b.HasOne("DAL.Model.UserAccount", "Owner")
                         .WithMany()
                         .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DAL.Model.RoomConnection", b =>
+                {
+                    b.HasOne("DAL.Model.Room", "Room")
+                        .WithMany()
+                        .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

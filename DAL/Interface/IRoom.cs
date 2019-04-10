@@ -10,5 +10,6 @@ namespace DAL.Interface
         Room AddNewRoom(UserAccount userAccount);
         Room GetRoomByKeyCode(string keyCode);
         Room GetRoomForOwner(string keyCode, UserAccount userAccount);
+        void SetGameEnded(Room room);
     }
 }

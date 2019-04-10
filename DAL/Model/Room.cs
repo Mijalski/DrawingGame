@@ -17,10 +17,7 @@ namespace DAL.Model
         
         [Required]
         public DateTime StartDateTime { get; set; }
-
-        [Required]
-        public int PlayerCount { get; set; }
-
+        
         [Required]
         public bool GameEnded { get; set; }
         

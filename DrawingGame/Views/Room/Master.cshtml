@@ -2,6 +2,11 @@
     ViewData["Title"] = "Rysuneczki - najlepsza gra imprezowa!";
 }
 
+@{
+    ViewData["Title"] = $"Rysuneczki - {Model.RoomCode.ToUpper()}";
+    Layout = "_MasterRoomLayout";
+}
+
 @using DAL.Model
 @using Microsoft.AspNetCore.Identity
 @model DrawingGame.Models.RoomModel
@@ -10,19 +15,20 @@
     STWORZYLES POKOJ
     <span id="room-id">@Model.RoomCode.ToUpper()</span>
     <div>
-        <span id="player-count">0</span>/10
+        <span id="player-count-pre-game">0</span>/10
     </div>
     <div id="user-names">
 
     </div>
     <button id="start-game" type="button" class="btn btn-success" disabled>Gramy!</button>
 </div>
-<div id="in-drawing" class="centered-text big-text d-none">
-    Pora rysować
-    <span id="player-drawing-count">0</span>/<span id="player-drawing-max-count"></span>
+<div id="timer-count" class="centered-text big-text d-none">
+    <div id="current-action"></div>
+    <span id="player-count">0</span>/<span id="player-max-count"></span>
     <span id="drawing-timer"></span>
+    <div id="answers"></div>
 </div>
-<div class="canvas-holder game d-none">
+<div id="in-guessing" class="canvas-holder-master d-none">
     <canvas id="drawing-canvas"></canvas>
 </div>
 

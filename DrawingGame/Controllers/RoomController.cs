@@ -28,7 +28,7 @@ namespace DrawingGame.Controllers
         
         public IActionResult Index(string keyCode, string userName)
         {
-            var room = _rooms.GetRoomByKeyCode(keyCode);
+            var room = _rooms.GetRoomByKeyCode(keyCode.Trim());
             if (room != null)
             {
                 var model = new RoomModel()
@@ -50,15 +50,14 @@ namespace DrawingGame.Controllers
         {
             var user = await GetCurrentUserAsync();
 
-            var existingKeyCode = Request.Cookies["keyCode"];  
-
-            var room = string.IsNullOrEmpty(existingKeyCode) ?  _rooms.AddNewRoom(user) : _rooms.GetRoomForOwner(existingKeyCode, user);
+            //var room = string.IsNullOrEmpty(existingKeyCode) ?  _rooms.AddNewRoom(user) : _rooms.GetRoomForOwner(existingKeyCode, user);
+            var room = _rooms.AddNewRoom(user);
             
             var model = new RoomModel()
             {
                 RoomCode = room.KeyCode
             };
-
+            
             return View(model);
         }
     }

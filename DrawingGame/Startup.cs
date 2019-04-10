@@ -59,9 +59,14 @@ namespace DrawingGame
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            //services.AddSignalR(hubOptions =>
+            //{
+            //    hubOptions.EnableDetailedErrors = true;
+            //});
             services.AddSignalR();
 
             services.AddScoped<IUserAccount, UserAccountManager>();
+            services.AddScoped<IRoomConnection, RoomConnectionManager>();
             services.AddScoped<IRoom, RoomManager>();
             services.AddScoped<IAnswer, AnswerManager>();
         }
@@ -80,7 +85,7 @@ namespace DrawingGame
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 

@@ -25,7 +25,6 @@ namespace BusinessLogic.Manager
                 GameEnded = false,
                 KeyCode = RandomizeHelper.GetRandomString(6),
                 Owner = userAccount,
-                PlayerCount = 0,
                 StartDateTime = DateTime.Now
             };
 
@@ -37,12 +36,18 @@ namespace BusinessLogic.Manager
 
         public Room GetRoomByKeyCode(string keyCode)
         {
-            return context.Rooms.Single(_ => _.KeyCode == keyCode);
+            return context.Rooms.SingleOrDefault(_ => _.KeyCode == keyCode);
         }
         
         public Room GetRoomForOwner(string keyCode, UserAccount userAccount)
         {
             return context.Rooms.Include(_ => _.Owner).Single(_ => _.KeyCode == keyCode && _.Owner == userAccount);
+        }
+
+        public void SetGameEnded(Room room)
+        {
+            context.Rooms.Single(_ => _ == room).GameEnded = true;
+            context.SaveChanges();
         }
         
     }

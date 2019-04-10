@@ -6,6 +6,7 @@ html,
 body {
   height: 100%;
   font-family: 'Poppins', sans-serif;
+  overscroll-behavior-y: contain;
 }
 h1 {
   border-bottom: 1px solid #ccc;
@@ -21,9 +22,19 @@ h2 {
 #drawing-canvas {
   border: 1px solid #ccc;
 }
+.non-game {
+  font-size: 18px;
+  margin-top: 50px;
+}
+.non-game img {
+  display: block;
+  margin: 100px auto;
+}
+#in-guessing #drawing-canvas {
+  border: none;
+}
 .canvas-holder {
-  padding: 5% 2% 0 2%;
-  height: 90%;
+  padding: 0 2% 0 2%;
 }
 .centered-text {
   text-align: center;
@@ -36,4 +47,40 @@ h2 {
 }
 #player-count {
   clear: both;
+}
+#guessing-answer,
+#answer-button-holder {
+  margin: 20px;
+}
+#guessing-answer > .btn-primary,
+#answer-button-holder > .btn-primary,
+#guessing-answer > #my-answer,
+#answer-button-holder > #my-answer {
+  margin-bottom: 20px;
+}
+.floating-btn {
+  position: absolute;
+  top: 0px;
+  padding: 20px;
+  font-size: 18px;
+  width: 300px;
+  color: #ffffff;
+  background: #007bd3;
+  border: 3px solid black;
+  border-radius: 10px;
+}
+.floating-btn.incorrect-answer {
+  background: #d63a13;
+}
+.floating-btn.correct-answer {
+  background: #2fd859;
+}
+#color-picker {
+  width: 50px;
+  height: 50px;
+  background: red;
+  border-radius: 10px;
+  position: absolute;
+  left: 5px;
+  top: 5px;
 }

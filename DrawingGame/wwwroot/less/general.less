@@ -4,7 +4,11 @@
 /************** COLORS *************/
 @color-grey: #ccc;
 @color-link: #007bff;
-
+@color-light-blue: #007bd3;
+@color-background: #2a2624;
+@color-light-green: #2fd859;
+@color-light-red: #d63a13;
+@color-white: #ffffff;
 /************** SCREEN SIZES *************/
 @col-max-size-xs: 576px;
 @col-max-size-sm: 768px;
@@ -13,10 +17,12 @@
 
 /************** MISC *************/
 @standard-border: 1px solid @color-grey;
+@standard-margin: 20px;
 
 html, body {
     height: 100%;
     font-family: 'Poppins', sans-serif;
+    overscroll-behavior-y: contain;
 }
 h1 {
     border-bottom: @standard-border;
@@ -32,9 +38,22 @@ h2 {
 #drawing-canvas{
     border: @standard-border;
 }
-.canvas-holder{
-    padding: 5% 2% 0 2%;
-    height: 90%;
+.non-game{
+    font-size: 18px;
+    margin-top: 50px;
+
+    img{
+        display: block;
+        margin: 100px auto;
+    }
+}
+#in-guessing {
+    #drawing-canvas {
+        border: none;
+    }
+}
+.canvas-holder {
+    padding: 0 2% 0 2%;
 }
 .centered-text{
     text-align: center;
@@ -47,4 +66,40 @@ h2 {
 }
 #player-count{
     clear: both;
+}
+#guessing-answer, #answer-button-holder {
+    margin: @standard-margin;
+
+    & > .btn-primary, & > #my-answer{
+
+        margin-bottom: @standard-margin;
+    }
+}
+.floating-btn {
+    position: absolute;
+    top: 0px;
+    padding: 20px;
+    font-size: 18px;
+    width: 300px;
+    color: @color-white;
+    background: @color-light-blue;
+    border: 3px solid black;
+    border-radius: 10px;
+
+    &.incorrect-answer {
+        background: @color-light-red;
+    }
+
+    &.correct-answer {
+        background: @color-light-green;
+    }
+}
+#color-picker {
+    width: 50px;
+    height: 50px;
+    background: red;
+    border-radius: 10px;
+    position: absolute;
+    left: 5px;
+    top: 5px;
 }

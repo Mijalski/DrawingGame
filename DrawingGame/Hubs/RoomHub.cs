@@ -12,27 +12,56 @@ namespace DrawingGame.Hubs
     public class RoomHub : Hub
     {
         private readonly IAnswer _answers;
-
-        public RoomHub(IAnswer answers)
+        private readonly IRoomConnection _roomConnections;
+        private readonly IRoom _rooms;   
+        
+        public RoomHub(IAnswer answers, IRoomConnection roomConnections, IRoom rooms)
         {
             _answers = answers;
+            _roomConnections = roomConnections;
+            _rooms = rooms;
         }
 
         public async Task AddToGroup(string groupName, string userName)
         {
-            await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
+            var connectionId = Context.ConnectionId;
 
-            await Clients.Group(groupName).SendAsync("RecieveNewPlayerMaster", Context.ConnectionId, userName);
+            await Groups.AddToGroupAsync(connectionId, groupName); //todo move to confirm player login - to add to group only once confirmed
+
+            _roomConnections.AddToRoom(groupName, connectionId, userName);
+
+            await Clients.Group(groupName).SendAsync("RecieveNewPlayerMaster", connectionId, userName);
         }
-        
-        public async Task ConfirmPlayerLogin(string connectionId, int gameState)
+
+        public override async Task OnDisconnectedAsync(Exception exception)
         {
-            await Clients.Client(connectionId).SendAsync("ConfirmPlayerJoin", gameState,Context.ConnectionId);
+            var roomConnection = _roomConnections.GetForConnection(Context.ConnectionId);
+            var room = roomConnection.Room;
+
+            await Groups.RemoveFromGroupAsync(Context.ConnectionId, room.KeyCode);
+
+            var masterConnectionId = _roomConnections.GetMaster(room.KeyCode).ConnectionId;
+
+            if (masterConnectionId == Context.ConnectionId)
+            {
+                _rooms.SetGameEnded(room);
+            }
+            else
+            {
+                await Clients.Client(masterConnectionId).SendAsync("PlayerDisconnected", Context.ConnectionId);
+            }
+        }
+
+        public async Task ConfirmPlayerLogin(string connectionId, string lightColor, string darkColor)
+        {
+            await Clients.Client(connectionId).SendAsync("ConfirmPlayerJoin", lightColor, darkColor);
         }
 
         public async Task CreateNewGroup(string groupName)
         {
             await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
+
+            _roomConnections.AddToRoom(groupName, Context.ConnectionId, "master", true);
 
             await Clients.Group(groupName).SendAsync("RoomStarted", groupName);
         }
@@ -55,12 +84,44 @@ namespace DrawingGame.Hubs
 
         public async Task GetDrawing(string connectionId)
         {
-            await Clients.Client(connectionId).SendAsync("GetDrawing");
+            await Clients.Client(connectionId).SendAsync("GetDrawing", Context.ConnectionId);
         }
         
-        public async Task SendDrawing(string connectionId, string answer, int[] clickX, int[] clickY, bool[] clickDrag)
+        public async Task SendDrawing(string connectionId, string answer, int[] clickX, int[] clickY, bool[] clickDrag, bool[] colorToggle, float canvasWidth, float canvasHeight)
         {
-            await Clients.Client(connectionId).SendAsync("RecieveDrawing", answer, clickX, clickY, clickDrag);
+            await Clients.Client(connectionId).SendAsync("RecieveDrawing", Context.ConnectionId, answer, clickX, clickY, clickDrag, colorToggle, canvasWidth, canvasHeight);
         }
+
+        public async Task StartVoting(string groupName)
+        {
+            await Clients.Group(groupName).SendAsync("StartVoting", Context.ConnectionId);
+        } 
+
+        public async Task SubmitAnswer(string connectionId, string userName, string answer)
+        {
+            await Clients.Client(connectionId).SendAsync("GetAnswer", Context.ConnectionId, userName, answer);
+        }
+
+        public async Task GuessCorrectAnswer(string groupName, string[] answers)
+        {
+            await Clients.Group(groupName).SendAsync("GuessCorrectAnswer", answers);
+        }
+
+        public async Task VoteAnswer(string connectionId, string userName, int buttonId)
+        {
+            await Clients.Client(connectionId).SendAsync("GetVote", Context.ConnectionId, userName, buttonId);
+        }
+
+        public async Task FinishVoting(string groupName)
+        {
+            await Clients.Group(groupName).SendAsync("VotingFinished");
+        } 
+
+        public async Task FinishAnswering(string groupName)
+        {
+            await Clients.Group(groupName).SendAsync("AnsweringFinished");
+        } 
+
     }
 }
+

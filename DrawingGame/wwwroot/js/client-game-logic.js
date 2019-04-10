@@ -1,23 +1,47 @@
 ﻿
-var gameStateEnum = {
-    WAITING_FOR_PLAYERS: 1,
-    DRAWING: 2,
-    ADDING_OWN_ANSWER: 3,
-    GUESSING_CORRECT_ANSWER: 4,
-    WAITING_FOR_NEW_ROUND: 5,
-    DISPLAYING_HIGH_SCORE: 6
-}
+
+var answerHolder = $("#answer-button-holder");
+var buttonAnswerSubmit = $("#confirm-answer");
+var answerTextBox = $("#my-answer");
+
+buttonAnswerSubmit.attr('disabled','disabled');
+
+answerTextBox.on('input propertychange paste', function() {
+    
+    if ($(this).val() !== "") {
+        buttonAnswerSubmit.removeAttr('disabled');
+
+    } else {
+
+        buttonAnswerSubmit.attr('disabled','disabled');
+    }
+
+});
 
 var gameLogicClient = {
-    
-    currentGameState: gameStateEnum.WAITING_FOR_PLAYERS,
+
     currentAnswer: "",
+    guessingOnMyDrawing: false,
+    myGuess: "",
+
 
     startDrawing: function (answer) {
-        $(".game").toggleClass("d-none");
-        $(".non-game").toggleClass("d-none");
+        $(".game").removeClass("d-none");
+        $(".non-game").addClass("d-none");
         gameLogicClient.currentAnswer = answer;
-        $("#answer-game").text("Hasło: " + gameLogicClient.currentAnswer);
+        $("#answer-game").text("Hasło: " + gameLogicClient.currentAnswer.toUpperCase());
+        clickX = [];
+        clickY = [];
+        clickDrag = [];
+        colorPicker.css("background", darkColor);
         setCanvasSize();
     },
+
+    createButtonForAnswer: function(element, index, array) {
+        
+        var newButton = $('<input/>').attr({ type: 'button', name:'btn'+index, value:element}).addClass("btn btn-primary btn-block btn-answer-vote");
+
+        newButton.on("click", buttonVoteClick);
+        answerHolder.append(newButton);
+    }
 };

@@ -7,17 +7,27 @@
 
 @model DrawingGame.Models.RoomModel
 
-<div class="text-center non-game">
-    Oczekiwanie na graczy
-</div>
-<div id="answer-game" class="game d-none text-center">
-    Hasło: 
-</div>
-<div class="canvas-holder game d-none">
-    <canvas id="drawing-canvas"></canvas>
-</div>
-<button id="finish-drawing" type="button" class="btn btn-success game btn-block d-none mt-1">Zatwierdź</button>
+<div class="client-body">
+    <div class="text-center text-big non-game">
+        Oczekiwanie na graczy
+        <img src="images/loading.gif" alt="loading gif"/>
+    </div>
+    <div id="answer-game" class="game d-none text-center">
+        Hasło:
+    </div>
+    <div class="canvas-holder game d-none">
+        <div id="color-picker"></div>
+        <canvas id="drawing-canvas"></canvas>
+    </div>
+    <button id="finish-drawing" type="button" class="btn btn-success game btn-block d-none mt-1">Zatwierdź</button>
+    <div id="guessing-answer" class="d-none">
+        <input type="text" class="form-control" id="my-answer" placeholder="Odpowiedź">
+        <button id="confirm-answer" type="button" class="btn btn-success btn-block mt-1">Zatwierdź</button>
+    </div>
+    <div id="answer-button-holder">
 
+    </div>
+</div>
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="~/lib/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/client-room-signalr.js"></script>
