@@ -18,19 +18,19 @@ namespace BusinessLogic.Manager
             seed = Environment.TickCount;
         }
 
-        public static Random Instance { get { return threadLocal.Value; } }
+        public static Random Instance => threadLocal.Value;
 
         //Methods to use:
-        public static int GetRandomValue(int maxValue, int minValue = 1)
+        public static int GetRandomValue(int maxValue, int minValue = 0)
         {
-            return RandomizeHelper.Instance.Next(minValue, maxValue);
+            return Instance.Next(minValue, maxValue);
         }
         
         public static string GetRandomString(int length)
         {
-            var random = RandomizeHelper.Instance;
             var chars = Enumerable.Range(0, length)
-                .Select(x => pool[random.Next(0, pool.Length)]);
+                .Select(x => pool[Instance.Next(0, pool.Length)]);
+
             return new string(chars.ToArray());
         }
     }
