@@ -12,7 +12,6 @@ answerTextBox.on('input propertychange paste', function() {
         buttonAnswerSubmit.removeAttr('disabled');
 
     } else {
-
         buttonAnswerSubmit.attr('disabled','disabled');
     }
 
@@ -33,6 +32,7 @@ var gameLogicClient = {
         clickX = [];
         clickY = [];
         clickDrag = [];
+        colorToggle = [];
         colorPicker.css("background", darkColor);
         setCanvasSize();
     },

@@ -27,7 +27,7 @@ var canvasWidthRatio = 0.0;
 var canvasHeightRatio = 0.0;
 var screenRatio = 0.0;
 var paint;
-var waitTime = 15; //in ms
+var waitTime = 5; //in ms
 
 function paint() {
 

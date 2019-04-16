@@ -72,11 +72,11 @@ var gameLogicMaster = {
 
     getPlayer: function (connectionId, userName) {
 
-        for (let i = 0; i < gameLogicMaster.playerArray.length; i++) {
+        for (let i = 0; i < this.playerArray.length; i++) {
 
-            if (gameLogicMaster.playerArray[i].userName === userName &&
-                gameLogicMaster.playerArray[i].connectionId === connectionId) {
-                return gameLogicMaster.playerArray[i];
+            if (this.playerArray[i].userName === userName &&
+                this.playerArray[i].connectionId === connectionId) {
+                return this.playerArray[i];
             }
         }
 
@@ -86,21 +86,21 @@ var gameLogicMaster = {
 
     playerDisconnect: function(connectionId) {
 
-        let player = gameLogicMaster.getPlayerForDisconnect(connectionId);
+        let player = this.getPlayerForDisconnect(connectionId);
         if (player != null) {
             player.isConnected = false;
-            gameLogicMaster.playerConnectedCount--;
+            this.playerConnectedCount--;
         }
     },
     
     getPlayerForDisconnect: function(connectionId) {
 
-        for (let i = 0; i < gameLogicMaster.playerArray.length; i++) {
+        for (let i = 0; i < this.playerArray.length; i++) {
 
-            if (gameLogicMaster.playerArray[i].connectionId === connectionId) {
+            if (this.playerArray[i].connectionId === connectionId) {
 
                 console.log("DISCONNECTED USER");
-                return gameLogicMaster.playerArray[i];
+                return this.playerArray[i];
             }
         }
 
@@ -109,17 +109,17 @@ var gameLogicMaster = {
 
     getPlayerForReconnect: function(userName, connectionId) {
 
-        for (let i = 0; i < gameLogicMaster.playerArray.length; i++) {
+        for (let i = 0; i < this.playerArray.length; i++) {
 
-            let player = gameLogicMaster.playerArray[i];
+            let player = this.playerArray[i];
 
             if (player.userName === userName && !player.isConnected) {
                 
                 console.log(`RECONNECTED USER${userName}`);
-                gameLogicMaster.playerConnectedCount++;
+                this.playerConnectedCount++;
                 player.isConnected = true;
                 player.connectionId = connectionId;
-                return gameLogicMaster.playerArray[i];
+                return this.playerArray[i];
             }
         }
 
@@ -128,7 +128,7 @@ var gameLogicMaster = {
 
     backToLobby: function() {
         
-        gameLogicMaster.currentGameState = gameStateEnum.WAITING_FOR_PLAYERS;
+        this.currentGameState = gameStateEnum.WAITING_FOR_PLAYERS;
         preGameDiv.removeClass("d-none");
         inGuessingDiv.addClass("d-none");
         timerAndCountDiv.addClass("d-none");
@@ -142,15 +142,15 @@ var gameLogicMaster = {
 
     startDrawing: function () {
 
-        gameLogicMaster.currentGameState = gameStateEnum.DRAWING;
-        gameLogicMaster.currentlyShowingDrawingPlayer = -1;
+        this.currentGameState = gameStateEnum.DRAWING;
+        this.currentlyShowingDrawingPlayer = -1;
 
         inGuessingDiv.addClass("d-none");
         preGameDiv.addClass("d-none");
         timerAndCountDiv.removeClass("d-none");
         currentActionDiv.text("Pora rysować"); //time to draw
 
-        gameLogicMaster.setTimerOn(gameLogicMaster.drawingTime);
+        this.setTimerOn(this.drawingTime);
     },
 
     changeTimer: function () {
@@ -183,23 +183,23 @@ var gameLogicMaster = {
 
     setTimerOn: function (time) {
 
-        gameLogicMaster.finishedActionPlayerCount = 0;
-        gameLogicMaster.setTimerOff();
+        this.finishedActionPlayerCount = 0;
+        this.setTimerOff();
 
-        if (gameLogicMaster.currentGameState === gameStateEnum.DISPLAYING_HIGH_SCORE) {
+        if (this.currentGameState === gameStateEnum.DISPLAYING_HIGH_SCORE) {
             
-            gameLogicMaster.finishedActionPlayerCount = gameLogicMaster.playerConnectedCount-1;
+            this.finishedActionPlayerCount = this.playerConnectedCount-1;
         }
 
-        maxPlayerCountDiv.text(gameLogicMaster.playerConnectedCount);
-        playerFinishedCountDiv.text(gameLogicMaster.finishedActionPlayerCount);
-        console.log(gameLogicMaster.finishedActionPlayerCount);
-        gameLogicMaster.currentActionTime = time;
+        maxPlayerCountDiv.text(this.playerConnectedCount);
+        playerFinishedCountDiv.text(this.finishedActionPlayerCount);
+        console.log(this.finishedActionPlayerCount);
+        this.currentActionTime = time;
 
-        if (gameLogicMaster.currentGameState === gameStateEnum.DRAWING) {
-            maxPlayerCountDiv.text(gameLogicMaster.playerConnectedCount);
+        if (this.currentGameState === gameStateEnum.DRAWING) {
+            maxPlayerCountDiv.text(this.playerConnectedCount);
         } else {
-            maxPlayerCountDiv.text(gameLogicMaster.playerConnectedCount - 1); //the person that was drawing wont be answering or guessing
+            maxPlayerCountDiv.text(this.playerConnectedCount - 1); //the person that was drawing wont be answering or guessing
         }
 
         timeLoop = setInterval(gameLogicMaster.changeTimer, 1000);
@@ -213,29 +213,36 @@ var gameLogicMaster = {
     playerFinishedDrawing: function (player) {
 
         player.hasFinishedDrawing = true;
-        gameLogicMaster.finishedActionPlayerCount++;
-        playerFinishedCountDiv.text(gameLogicMaster.finishedActionPlayerCount);
+        this.finishedActionPlayerCount++;
+        playerFinishedCountDiv.text(this.finishedActionPlayerCount);
 
-        if (gameLogicMaster.finishedActionPlayerCount === gameLogicMaster.playerConnectedCount) {
+        if (this.finishedActionPlayerCount === this.playerConnectedCount) {
             
-            gameLogicMaster.getNextDrawing();
+            this.getNextDrawing();
         }
     },
 
     getNextDrawing: function () {
 
         answersDiv.empty();
-        gameLogicMaster.currentlyShowingDrawingPlayer++;
 
-        if (gameLogicMaster.currentlyShowingDrawingPlayer >= gameLogicMaster.playerArray.length) {
-            //START AGAIN
-            gameLogicMaster.backToLobby();
-            return;
+        let foundPlayer = false;
+        while (!foundPlayer) {
+            this.currentlyShowingDrawingPlayer++;
+
+            if (this.currentlyShowingDrawingPlayer >= this.playerArray.length) {
+
+                this.backToLobby(); // Start again no more players
+                return;
+            }
+            else if (this.playerArray[this.currentlyShowingDrawingPlayer].isConnected === true) {
+                foundPlayer = true;
+            }
         }
-
-        gameLogicMaster.setTimerOff();
-        gameLogicMaster.currentGameState = gameStateEnum.ADDING_OWN_ANSWER;
-        let player = gameLogicMaster.playerArray[gameLogicMaster.currentlyShowingDrawingPlayer];
+        
+        this.setTimerOff();
+        this.currentGameState = gameStateEnum.ADDING_OWN_ANSWER;
+        let player = this.playerArray[this.currentlyShowingDrawingPlayer];
         player.alreadyShownDrawing = true;
         getDrawingOfUser(player.connectionId);
     },
@@ -245,29 +252,29 @@ var gameLogicMaster = {
         inGuessingDiv.removeClass("d-none");
         currentActionDiv.text("Pora zgadywać"); //time to guess what the drawing is about
 
-        for (let i = 0; i < gameLogicMaster.playerArray.length; i++) { //clear out answers for players
+        for (let i = 0; i < this.playerArray.length; i++) { //clear out answers for players
 
-            let player = gameLogicMaster.playerArray[i];
+            let player = this.playerArray[i];
             player.answer = "";
             player.answerVote = -1;
         }
 
-        gameLogicMaster.playerArray[gameLogicMaster.currentlyShowingDrawingPlayer].answer = answer.toUpperCase();
+        this.playerArray[this.currentlyShowingDrawingPlayer].answer = answer.toUpperCase();
         
         startVoting();
-        gameLogicMaster.setTimerOn(gameLogicMaster.guessingTime);
+        this.setTimerOn(this.guessingTime);
     },
 
     setAnswer: function (connectionId, userName, answer) {
 
-        let player = gameLogicMaster.getPlayer(connectionId, userName);
+        let player = this.getPlayer(connectionId, userName);
         player.answer = answer.toUpperCase();
-        gameLogicMaster.finishedActionPlayerCount++;
-        playerFinishedCountDiv.text(gameLogicMaster.finishedActionPlayerCount);
+        this.finishedActionPlayerCount++;
+        playerFinishedCountDiv.text(this.finishedActionPlayerCount);
 
-        if (gameLogicMaster.finishedActionPlayerCount === gameLogicMaster.playerConnectedCount - 1) {
-            gameLogicMaster.setTimerOff();
-            gameLogicMaster.showAnswers();
+        if (this.finishedActionPlayerCount === this.playerConnectedCount - 1) {
+            this.setTimerOff();
+            this.showAnswers();
         }
     },
 
@@ -277,27 +284,27 @@ var gameLogicMaster = {
         let answerArrForDisplay = [];
         let answerArrForSending = [];
 
-        for (let i = 0; i < gameLogicMaster.playerArray.length; i++) {
+        for (let i = 0; i < this.playerArray.length; i++) {
 
-            if (i !== gameLogicMaster.currentlyShowingDrawingPlayer &&
-                      gameLogicMaster.playerArray[i].answer !== "") {
+            if (i !== this.currentlyShowingDrawingPlayer &&
+                      this.playerArray[i].answer !== "") {
 
-                let player = gameLogicMaster.playerArray[i];
+                let player = this.playerArray[i];
                 answerArrForDisplay.push(`<div id='btn${i}' data-id='${i}' class='floating-btn'>${player.answer}</div>`);
                 answerArrForSending.push(player.answer);
             }
         }
 
         //insert the answer in random place
-        let randomVal = Math.floor(Math.random() * gameLogicMaster.playerArray.length);
-        let user = gameLogicMaster.playerArray[gameLogicMaster.currentlyShowingDrawingPlayer];
+        let randomVal = Math.floor(Math.random() * this.playerArray.length);
+        let user = this.playerArray[this.currentlyShowingDrawingPlayer];
 
-        answerArrForDisplay.splice(randomVal, 0, `<div id='btn${gameLogicMaster.currentlyShowingDrawingPlayer}' data-id='${gameLogicMaster.currentlyShowingDrawingPlayer}' class='floating-btn'>${user.answer}</div>`);
+        answerArrForDisplay.splice(randomVal, 0, `<div id='btn${this.currentlyShowingDrawingPlayer}' data-id='${this.currentlyShowingDrawingPlayer}' class='floating-btn'>${user.answer}</div>`);
         answerArrForSending.splice(randomVal, 0, user.answer);
 
         answersDiv.html(answerArrForDisplay.join(""));
 
-        gameLogicMaster.setTimerOn(gameLogicMaster.answeringTime);
+        this.setTimerOn(this.answeringTime);
 
         //apply styling
         $(".floating-btn").each(function( index ) {
@@ -311,7 +318,7 @@ var gameLogicMaster = {
             }
         });
 
-        gameLogicMaster.currentGameState = gameStateEnum.GUESSING_CORRECT_ANSWER;
+        this.currentGameState = gameStateEnum.GUESSING_CORRECT_ANSWER;
 
         guessCorrectAnswer(answerArrForSending);
     },
@@ -323,16 +330,16 @@ var gameLogicMaster = {
 
     recieveVote: function (connectionId, userName, buttonId) {
 
-        let player = gameLogicMaster.getPlayer(connectionId, userName);
-        let answerVoteId = gameLogicMaster.getAnswerVoteIdForButton(buttonId);
+        let player = this.getPlayer(connectionId, userName);
+        let answerVoteId = this.getAnswerVoteIdForButton(buttonId);
         player.answerVote = answerVoteId;
 
-        gameLogicMaster.finishedActionPlayerCount++;
-        playerFinishedCountDiv.text(gameLogicMaster.finishedActionPlayerCount);
+        this.finishedActionPlayerCount++;
+        playerFinishedCountDiv.text(this.finishedActionPlayerCount);
 
-        if (gameLogicMaster.finishedActionPlayerCount === gameLogicMaster.playerArray.length - 1) {
+        if (this.finishedActionPlayerCount === this.playerArray.length - 1) {
             console.log("ROUND FINISHED");
-            gameLogicMaster.showVotes();
+            this.showVotes();
         }
     },
 
@@ -340,7 +347,7 @@ var gameLogicMaster = {
 
         finishVoting();
         currentActionDiv.text("Odpowiedzi: ");
-        gameLogicMaster.currentGameState = gameStateEnum.DISPLAYING_HIGH_SCORE;
+        this.currentGameState = gameStateEnum.DISPLAYING_HIGH_SCORE;
         
         $(".floating-btn").each(function(index) {
             
@@ -349,7 +356,7 @@ var gameLogicMaster = {
             }, 4000*index);
         });
 
-        gameLogicMaster.setTimerOn(gameLogicMaster.showingAnswersTime*gameLogicMaster.playerArray.length);
+        this.setTimerOn(this.showingAnswersTime*this.playerArray.length);
     },
 
     showIndividualVote: function(index) {
@@ -362,13 +369,13 @@ var gameLogicMaster = {
 
         let playerId = button.data("id");
         let playersWhoPickedThisAnswer = [];
-        let isCorrectAnswer = index === gameLogicMaster.currentlyShowingDrawingPlayer;
+        let isCorrectAnswer = index === this.currentlyShowingDrawingPlayer;
 
-        for (let i = 0; i < gameLogicMaster.playerArray.length; i++) {
+        for (let i = 0; i < this.playerArray.length; i++) {
             
-            let player = gameLogicMaster.playerArray[i];
+            let player = this.playerArray[i];
             
-            if (i !== gameLogicMaster.currentlyShowingDrawingPlayer && player.answerVote === index) {
+            if (i !== this.currentlyShowingDrawingPlayer && player.answerVote === index) {
 
                 playersWhoPickedThisAnswer.push(player);
             }
@@ -376,18 +383,23 @@ var gameLogicMaster = {
 
         if (!isCorrectAnswer) {
 
-            let answerOwnerUserName = gameLogicMaster.playerArray[playerId];
+            let answerOwnerUserName = this.playerArray[playerId];
 
             button.addClass("incorrect-answer");
 
             if (playersWhoPickedThisAnswer.length > 0) {
 
-                button.prepend(`Nabrał was: ${answerOwnerUserName.userName}<br/>`);
-                button.append(`<br/>Frajerzy:`);
-
+                let appendHeader = true;
                 playersWhoPickedThisAnswer.forEach(function(element) {
 
                     if (answerOwnerUserName !== element) {  //don't want to award points to player who voted his own answer :D
+
+                        if (appendHeader) {
+                            
+                            button.prepend(`Nabrał was: ${answerOwnerUserName.userName}<br/>`);
+                            button.append(`<br/>Frajerzy:`);
+                            appendHeader = !appendHeader;
+                        }
 
                         answerOwnerUserName.points += pointsForBaitingPlayer;
                         button.append(`<br/>${element.userName}`);
@@ -404,7 +416,7 @@ var gameLogicMaster = {
             button.addClass("correct-answer");
             button.prepend(`Odpowiedź prawidłowa!<br/>`);
 
-            let drawingPlayer = gameLogicMaster.playerArray[gameLogicMaster.currentlyShowingDrawingPlayer];
+            let drawingPlayer = this.playerArray[this.currentlyShowingDrawingPlayer];
 
             if (playersWhoPickedThisAnswer.length > 0) {
 

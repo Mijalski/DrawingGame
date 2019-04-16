@@ -59,7 +59,6 @@ var colorPicker = $("#color-picker");
 
 colorPicker.on( "click", function() {
     usingLightColor = !usingLightColor;
-    console.log("switcharoo");
     colorPicker.css("background", usingLightColor ? darkColor : lightColor); //we want it reversed to show the other color
 });
 

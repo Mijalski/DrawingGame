@@ -83,12 +83,12 @@ using Microsoft.AspNetCore.Identity;
             WriteLiteral("\r\n<div class=\"row\">\r\n    <div class=\"col-md-4 offset-md-4\">\r\n        ");
             EndContext();
             BeginContext(288, 626, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "24551de32477424db91084d19fd2e214", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0c00abc2ad3f4667a1255715670b3786", async() => {
                 BeginContext(338, 115, true);
                 WriteLiteral("\r\n            <div class=\"form-group\">\r\n                <label for=\"room-code-join\">Nick:</label>\r\n                ");
                 EndContext();
                 BeginContext(453, 96, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "d6f74d2f10e04ce9a652d1ec3a6f5490", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "c2b99d0ba52b45b78cf417e8fa2fdc93", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper>();
@@ -116,7 +116,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper.For = ModelExpressionProvid
                 WriteLiteral("\r\n                <label for=\"room-code-join\">Nazwa pokoju:</label>\r\n                ");
                 EndContext();
                 BeginContext(634, 104, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "301fb79286d04bb39b7082c88449669c", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("input", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "58f2550cb00f4564b3367adb62deec33", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper>();
@@ -174,7 +174,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper.For = ModelExpressionProvid
             WriteLiteral("    <hr/>\r\n    <div class=\"row mt-4\">\r\n        <div class=\"col-md-4 offset-md-4\">\r\n            ");
             EndContext();
             BeginContext(1072, 311, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "04a6fd45edee458ca731f597f65fcdf6", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b52113c8b7eb4bc39682140c1711f6d4", async() => {
                 BeginContext(1124, 252, true);
                 WriteLiteral("\r\n                <div class=\"form-group mt-4\">\r\n                    <button id=\"create-room-button\" class=\"float-right btn btn-primary btn-block\">\r\n                        Stwórz grę\r\n                    </button>\r\n                </div>\r\n            ");
                 EndContext();
