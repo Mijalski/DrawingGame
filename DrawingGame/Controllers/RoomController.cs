@@ -28,7 +28,7 @@ namespace DrawingGame.Controllers
         
         public IActionResult Index(string keyCode, string userName)
         {
-            var room = _rooms.GetRoomByKeyCode(keyCode.Trim());
+            var room = _rooms.GetRoomByKeyCode(keyCode);
             if (room != null)
             {
                 var model = new RoomModel()

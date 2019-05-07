@@ -32,6 +32,17 @@ connection.on("RecieveNewPlayerMaster", function (connectionId, userName) {
             
             if (playerFound != null) {
                 connection.invoke('ConfirmPlayerLogin', connectionId, playerFound.drawLightColor, playerFound.drawDarkColor);
+
+                if (gameLogicMaster.currentGameState === gameStateEnum.DRAWING) {
+                    connection.invoke('StartRound', connectionId, playerFound.drawLightColor, playerFound.drawDarkColor);
+                } 
+                else if (gameLogicMaster.currentGameState === gameStateEnum.ADDING_OWN_ANSWER) {
+                    connection.invoke('StartVoting', connectionId, playerFound.drawLightColor, playerFound.drawDarkColor);
+                }
+                else if (gameLogicMaster.currentGameState === gameStateEnum.GUESSING_CORRECT_ANSWER) {
+                    connection.invoke('GuessCorrectAnswer', connectionId, playerFound.drawLightColor, playerFound.drawDarkColor);
+                }
+                
                 return;
             } 
         }
@@ -79,6 +90,10 @@ connection.on("ReadyDrawing", function(connectionId, userName) {
 });
 
 connection.on("RecieveDrawing", function(connectionId, currentAnswer, _clickX, _clickY, _clickDrag, _colorToggle, _canvasWidth, _canvasHeight) {
+
+    if (_clickX.length < 3) {
+        gameLogicMaster.getNextDrawing();
+    }
 
     gameLogicMaster.showNextDrawing(currentAnswer);
 

@@ -90,6 +90,7 @@ var gameLogicMaster = {
         if (player != null) {
             player.isConnected = false;
             this.playerConnectedCount--;
+            this.decrementUserCount();
         }
     },
     
@@ -151,6 +152,29 @@ var gameLogicMaster = {
         currentActionDiv.text("Pora rysować"); //time to draw
 
         this.setTimerOn(this.drawingTime);
+    },
+
+    decrementUserCount: function() {
+        
+        maxPlayerCountDiv.text(this.playerConnectedCount);
+        if (this.finishedActionPlayerCount === this.playerConnectedCount) {
+
+            if (gameLogicMaster.currentGameState === gameStateEnum.DRAWING) {
+
+                gameLogicMaster.getNextDrawing();
+            } 
+
+        } else if (this.finishedActionPlayerCount === this.playerConnectedCount - 1) {
+
+            if (gameLogicMaster.currentGameState === gameStateEnum.ADDING_OWN_ANSWER) {
+
+                gameLogicMaster.showAnswers();
+            } 
+            else if (gameLogicMaster.currentGameState === gameStateEnum.GUESSING_CORRECT_ANSWER) {
+
+                gameLogicMaster.showVotes();
+            } 
+        }
     },
 
     changeTimer: function () {
@@ -337,7 +361,7 @@ var gameLogicMaster = {
         this.finishedActionPlayerCount++;
         playerFinishedCountDiv.text(this.finishedActionPlayerCount);
 
-        if (this.finishedActionPlayerCount === this.playerArray.length - 1) {
+        if (this.finishedActionPlayerCount === this.playerConnectedCount - 1) {
             console.log("ROUND FINISHED");
             this.showVotes();
         }

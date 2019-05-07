@@ -36,7 +36,9 @@ namespace BusinessLogic.Manager
 
         public Room GetRoomByKeyCode(string keyCode)
         {
-            return context.Rooms.SingleOrDefault(_ => _.KeyCode == keyCode);
+            return string.IsNullOrEmpty(keyCode) ? 
+                null :
+                context.Rooms.SingleOrDefault(_ => _.KeyCode == keyCode.Replace(" ", string.Empty));
         }
         
         public Room GetRoomForOwner(string keyCode, UserAccount userAccount)
